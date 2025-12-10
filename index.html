@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- =========================================
          SEO & METADATA CONFIGURATION
@@ -13,6 +13,19 @@
     <meta name="author" content="Naveen Soni">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://gemini.christmas/" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" sizes="32x32" href="f32.ico">
+    <link rel="icon" type="image/x-icon" sizes="64x64" href="f64.ico">
+    <link rel="icon" type="image/x-icon" sizes="128x128" href="f128.ico">
+    <link rel="shortcut icon" href="f32.ico" type="image/x-icon">
+
+    <!-- Mobile App Configuration (iOS & Android) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Gemini Xmas">
+    <link rel="apple-touch-icon" href="f128.ico">
+    <meta name="theme-color" content="#d42426">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -58,141 +71,184 @@
     <style>
         /* --- CSS RESET & VARIABLES --- */
         :root {
-            /* Light Theme (Default) */
-            --bg-color: #fff9f9;
-            --sidebar-color: #ffebeb;
-            --text-color: #4a0505;
-            --accent-red: #cc0000;
-            --dim-red: #ffcccc;
-            --user-msg-bg: #ffcccc;
-            --user-msg-text: #4a0505;
+            /* Light Theme (Default) - Cleaner, warmer */
+            --bg-color: #fdfbfb;
+            --sidebar-color: #f8f0f0;
+            --text-color: #2d0a0a;
+            --accent-red: #d42426; /* Classic Christmas Red */
+            --dim-red: #e6b3b3;
+            --border-color: #eecaca;
+            
+            --user-msg-bg: #fff0f0;
+            --user-msg-text: #590000;
+            --user-msg-border: #ffd6d6;
+            
             --font-family: 'VT323', monospace;
-            --scanline-color: rgba(100, 0, 0, 0.05);
-            --modal-bg: #fff;
-            --modal-text: #000;
-            --overlay-color: rgba(0,0,0,0.5);
+            --scanline-color: rgba(0, 0, 0, 0.02); /* Very subtle */
+            --modal-bg: #ffffff;
+            --modal-text: #2d0a0a;
+            --overlay-color: rgba(255, 255, 255, 0.8);
+            
+            --shadow-soft: 0 4px 12px rgba(212, 36, 38, 0.08);
         }
 
         body.dark-theme {
-            /* Dark Theme */
-            --bg-color: #0f0202;
-            --sidebar-color: #1a0505;
-            --text-color: #ffe6e6;
-            --accent-red: #ff0033;
+            /* Dark Theme - High contrast, retro terminal */
+            --bg-color: #0a0a0a;
+            --sidebar-color: #141414;
+            --text-color: #eeeeee;
+            --accent-red: #ff4d4d;
             --dim-red: #5c0a0a;
-            --user-msg-bg: #5c0a0a;
-            --user-msg-text: #ffffff;
-            --scanline-color: rgba(255, 0, 0, 0.03);
-            --modal-bg: #1a0505;
+            --border-color: #331010;
+            
+            --user-msg-bg: #2d0505;
+            --user-msg-text: #ffcccc;
+            --user-msg-border: #5c0a0a;
+            
+            --scanline-color: rgba(255, 0, 0, 0.04);
+            --modal-bg: #141414;
             --modal-text: #ffcccc;
-            --overlay-color: rgba(255, 0, 0, 0.3);
+            --overlay-color: rgba(0, 0, 0, 0.7);
+            
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent; /* Remove mobile tap highlight */
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-family);
-            font-size: 1.3rem;
+            font-size: 1.35rem; /* Slightly larger for readability */
             height: 100vh;
             display: flex;
             overflow: hidden;
             position: relative;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Scanline Effect */
+        /* Scanline Effect - Subtle Texture */
         body::after {
             content: " ";
             display: block;
             position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(var(--scanline-color) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(var(--scanline-color) 50%, rgba(0, 0, 0, 0) 50%);
+            background-size: 100% 4px;
             z-index: 10;
-            background-size: 100% 2px, 3px 100%;
             pointer-events: none;
+            opacity: 0.6;
         }
 
         /* --- SIDEBAR --- */
         .sidebar {
-            width: 260px;
+            width: 270px;
             background-color: var(--sidebar-color);
-            border-right: 2px solid var(--dim-red);
+            border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
-            padding: 20px;
-            transition: transform 0.3s ease, background-color 0.3s;
+            padding: 25px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s;
             z-index: 50;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.02);
+            /* Safe area for iPhone X+ */
+            padding-top: max(25px, env(safe-area-inset-top)); 
         }
 
-        /* Mobile Close Button (Hidden on Desktop) */
+        /* Mobile Close Button */
         .sidebar-close-btn {
             display: none; 
             background: none;
             border: none;
             color: var(--accent-red);
-            font-size: 2rem;
+            font-size: 2.2rem;
             align-self: flex-end;
             cursor: pointer;
             font-family: var(--font-family);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+            line-height: 0.8;
         }
 
         h1 {
             color: var(--accent-red);
-            font-size: 3rem;
+            font-size: 3.2rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+            margin-bottom: 35px;
+            font-weight: normal;
         }
 
-        /* Sidebar Buttons */
+        /* Sidebar Buttons - Refined */
         .sidebar-btn {
             background: transparent;
-            border: 2px dashed var(--accent-red);
-            color: var(--accent-red);
-            padding: 10px;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 12px 15px;
             cursor: pointer;
             font-family: var(--font-family);
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             text-align: left;
-            transition: 0.2s;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 12px;
+            margin-bottom: 12px;
+            border-radius: 6px; /* Soft edges */
+        }
+
+        .sidebar-btn span {
+            color: var(--accent-red);
+            font-size: 1.2em;
         }
 
         .sidebar-btn:hover {
+            background: var(--bg-color);
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+            transform: translateX(4px);
+            box-shadow: 2px 2px 0px var(--border-color);
+        }
+        
+        /* Specific Button Styles */
+        .new-chat-btn {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+            background: rgba(212, 36, 38, 0.03);
+        }
+        .new-chat-btn:hover {
             background: var(--accent-red);
             color: var(--bg-color);
+            border-color: var(--accent-red);
         }
-
-        .theme-toggle {
-            margin-top: 10px;
-            border-style: solid;
-            justify-content: center;
+        .new-chat-btn span {
+            color: inherit;
         }
 
         .history-list {
-            margin-top: 20px;
+            margin-top: 30px;
             flex: 1;
-            opacity: 0.7;
+            opacity: 0.6;
             font-size: 1.1rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
         }
 
         .history-item {
-            padding: 8px 0;
+            padding: 6px 0;
             cursor: default;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .history-item::before {
+            content: '>';
+            color: var(--accent-red);
+            font-size: 0.8em;
         }
         
         /* Mobile Overlay */
@@ -202,7 +258,8 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background: var(--overlay-color);
             z-index: 40;
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(4px);
+            transition: opacity 0.3s;
         }
 
         /* --- MAIN CHAT AREA --- */
@@ -213,147 +270,166 @@
             position: relative;
             z-index: 15;
             width: 100%;
+            /* Safe area spacing */
+            padding-top: env(safe-area-inset-top); 
         }
 
-        /* Mobile Header */
+        /* Mobile Header - Cleaner */
         .mobile-header {
             display: none;
-            padding: 15px;
-            border-bottom: 1px solid var(--dim-red);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
             background: var(--sidebar-color);
             color: var(--accent-red);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             text-align: center;
             position: relative;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            /* Prevent content hiding under notches */
+            padding-top: max(15px, env(safe-area-inset-top));
         }
         
         .menu-btn {
             position: absolute;
-            left: 15px;
+            left: 20px;
+            top: 50%; /* Center vertically */
+            transform: translateY(-50%);
             background: none;
             border: none;
-            color: var(--accent-red);
+            color: var(--text-color);
             font-size: 1.8rem;
             cursor: pointer;
             font-family: var(--font-family);
             line-height: 1;
+            padding: 5px;
+            /* Adjust for notch in mobile header */
+            margin-top: calc(env(safe-area-inset-top) / 2); 
         }
         
         .mobile-controls {
             position: absolute;
-            right: 15px;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
             display: flex;
-            gap: 10px;
+            gap: 15px;
+            /* Adjust for notch */
+            margin-top: calc(env(safe-area-inset-top) / 2);
         }
         
         .mobile-btn {
             background: none;
-            border: 1px solid var(--accent-red);
-            color: var(--accent-red);
+            border: none;
+            color: var(--text-color);
             font-family: var(--font-family);
-            padding: 2px 8px;
             cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
         }
+        .mobile-btn:hover { color: var(--accent-red); }
 
         .chat-container {
             flex: 1;
-            padding: 20px 20px 0 20px;
+            padding: 30px 20px 0 20px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 30px;
             scroll-behavior: smooth;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         /* Custom Scrollbar */
-        .chat-container::-webkit-scrollbar {
-            width: 8px;
-        }
-        .chat-container::-webkit-scrollbar-track {
-            background: var(--bg-color);
-        }
-        .chat-container::-webkit-scrollbar-thumb {
-            background: var(--dim-red);
-        }
+        .chat-container::-webkit-scrollbar { width: 6px; }
+        .chat-container::-webkit-scrollbar-track { background: transparent; }
+        .chat-container::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
 
         /* --- MESSAGES --- */
         .message {
-            max-width: 85%;
-            padding: 10px 15px;
-            line-height: 1.4;
+            max-width: 80%;
+            padding: 15px 20px;
+            line-height: 1.5;
             position: relative;
+            font-size: 1.35rem;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .user-msg {
             align-self: flex-end;
             background-color: var(--user-msg-bg);
             color: var(--user-msg-text);
-            border: 1px solid var(--accent-red);
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            border: 1px solid var(--user-msg-border);
+            border-radius: 12px 12px 2px 12px;
         }
 
         .ai-msg {
             align-self: flex-start;
-            padding-left: 40px;
-            position: relative;
+            padding-left: 0;
+            padding-right: 20px;
         }
 
-        .ai-msg::before {
-            content: '♦';
-            position: absolute;
-            left: 0;
-            top: 10px;
+        .ai-icon {
             color: var(--accent-red);
-            font-size: 1.5rem;
-            animation: pulse 2s infinite;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            display: block;
+            font-weight: bold;
         }
 
         .error-msg {
             color: var(--accent-red);
-            border: 1px dashed var(--accent-red);
-            padding: 10px;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
+            border: 1px solid var(--accent-red);
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(212, 36, 38, 0.05);
         }
 
         .christmas-response {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: var(--accent-red);
-            text-shadow: 0 0 2px var(--accent-red);
             white-space: pre-wrap;
+            line-height: 1.4;
         }
 
-        /* --- INPUT AREA (TIDY & MINIMAL) --- */
+        /* --- INPUT AREA (Clean & Floating) --- */
         .input-area {
-            padding: 15px;
-            background-color: var(--bg-color);
+            padding: 20px 20px 30px 20px;
+            background-color: transparent; /* Transparent to blend */
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: background-color 0.3s;
+            width: 100%;
+            /* Bottom safe area */
+            padding-bottom: max(30px, env(safe-area-inset-bottom));
         }
 
         .input-box-wrapper {
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;
             position: relative;
             background: var(--sidebar-color);
-            border: 2px solid var(--dim-red);
-            padding: 8px 15px;
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
             display: flex;
             align-items: center;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
-            border-radius: 4px;
+            border-radius: 30px; /* Fully rounded pill shape */
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
         }
 
         .input-box-wrapper:focus-within {
             border-color: var(--accent-red);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(212, 36, 38, 0.15);
         }
 
         input[type="text"] {
@@ -362,56 +438,63 @@
             border: none;
             color: var(--text-color);
             font-family: var(--font-family);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             outline: none;
-            padding-top: 2px;
+            padding: 5px 0;
         }
 
         button#send-btn {
-            background: transparent;
+            background: var(--accent-red);
             border: none;
-            color: var(--dim-red);
+            color: var(--bg-color);
             font-size: 1.2rem;
             cursor: pointer;
-            margin-left: 10px;
-            transition: color 0.2s;
+            margin-left: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, background 0.2s;
         }
 
-        input:not(:placeholder-shown) + button#send-btn {
-            color: var(--accent-red);
+        button#send-btn:hover {
+            transform: scale(1.1);
+            background: #b01012;
         }
 
         /* --- FOOTER --- */
         .footer {
-            margin-top: 10px;
-            font-size: 0.9rem;
+            margin-top: 15px;
+            font-size: 1rem;
             color: var(--text-color);
-            opacity: 0.6;
+            opacity: 0.5;
             text-align: center;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .footer a {
-            color: var(--accent-red);
+            color: var(--text-color);
             text-decoration: none;
-            border-bottom: 1px solid var(--dim-red);
-            padding-bottom: 1px;
-            transition: all 0.3s;
+            border-bottom: 1px dotted var(--text-color);
+            transition: color 0.3s;
         }
 
         .footer a:hover {
-            background-color: var(--accent-red);
-            color: var(--bg-color);
+            color: var(--accent-red);
+            border-bottom-color: var(--accent-red);
         }
 
         /* --- SNOW ANIMATION --- */
         .snowflake {
             position: fixed;
             top: -20px;
-            color: var(--text-color);
+            color: var(--text-color); 
             pointer-events: none;
             z-index: 100;
             animation: fall linear forwards;
+            opacity: 0.6;
         }
         
         body.dark-theme .snowflake {
@@ -420,65 +503,107 @@
         }
 
         @keyframes fall {
-            to { transform: translateY(105vh); }
+            to { transform: translateY(105vh) rotate(360deg); }
         }
 
-        /* --- MODAL --- */
+        /* --- MODAL (Clean Design) --- */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.6);
             z-index: 1000;
             display: none;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s;
         }
         
         .modal {
             background: var(--modal-bg);
             color: var(--modal-text);
-            border: 4px double var(--accent-red);
-            padding: 20px;
+            border: 1px solid var(--accent-red);
+            border-radius: 12px;
+            padding: 30px;
             width: 90%;
-            max-width: 500px;
+            max-width: 480px;
             text-align: center;
             font-family: var(--font-family);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             position: relative;
         }
         
-        .modal h2 { margin-bottom: 15px; color: var(--accent-red); }
-        .doge-address {
-            background: rgba(0,0,0,0.1);
-            padding: 10px;
-            word-break: break-all;
-            margin: 15px 0;
-            font-size: 1rem;
-            border: 1px solid var(--dim-red);
+        .modal h2 { 
+            margin-bottom: 20px; 
+            color: var(--accent-red); 
+            font-size: 2rem;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(212, 36, 38, 0.1);
+            padding-bottom: 10px;
+            display: inline-block;
         }
+        
+        .modal p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .doge-address {
+            background: rgba(0,0,0,0.03);
+            padding: 15px;
+            word-break: break-all;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: monospace;
+            color: var(--accent-red);
+        }
+        
         .modal-btn {
             background: var(--accent-red);
             color: #fff;
             border: none;
-            padding: 5px 15px;
+            padding: 10px 25px;
             font-family: inherit;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
             margin-top: 10px;
+            border-radius: 30px;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        
+        .modal-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .close-btn-ghost {
+            background: transparent; 
+            color: var(--text-color); 
+            border: 1px solid var(--border-color);
+            margin-left: 10px;
+        }
+        .close-btn-ghost:hover {
+            border-color: var(--text-color);
+            background: rgba(0,0,0,0.05);
         }
 
         /* About Text Styles */
         .about-text {
             text-align: left;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-size: 1.15rem;
         }
         .about-section {
             margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed var(--dim-red);
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
         }
         .about-section:last-child { border-bottom: none; }
+        .about-section strong { color: var(--accent-red); }
 
         /* Visually Hidden SEO Content */
         .visually-hidden {
@@ -501,7 +626,7 @@
                 left: 0;
                 transform: translateX(-100%);
                 width: 280px;
-                box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+                box-shadow: 2px 0 20px rgba(0,0,0,0.3);
             }
             
             .sidebar.active {
@@ -520,14 +645,10 @@
                 display: flex; 
             }
             
-            h1 { font-size: 2rem; margin: 0; }
-            .message { max-width: 95%; }
-            
-            /* Sidebar header tweaks for mobile */
-            .sidebar h1 {
-                font-size: 2.5rem;
-                margin-top: 0;
-            }
+            h1 { font-size: 2.5rem; margin-bottom: 20px; margin-top: 10px; }
+            .message { max-width: 92%; }
+            .input-box-wrapper { padding: 8px 15px; }
+            button#send-btn { width: 35px; height: 35px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -560,18 +681,17 @@
         <h1>Gemini</h1>
         
         <button class="sidebar-btn new-chat-btn"><span>+</span> NEW CHAT</button>
-        <button class="sidebar-btn" id="donate-btn-sidebar"><span>Ð</span> DONATE DOGE</button>
+        <button class="sidebar-btn" id="donate-btn-sidebar"><span>Ð</span> CHARITY / DONATE</button>
         <button class="sidebar-btn" id="about-btn-sidebar"><span>?</span> ABOUT</button>
-        <button class="sidebar-btn theme-toggle" id="theme-btn">☀ / ☾ MODE</button>
+        <button class="sidebar-btn theme-toggle" id="theme-btn"><span>☀</span> THEME MODE</button>
         
         <div class="history-list">
-            <div class="history-item">Recent Activity...</div>
-            <div class="history-item">> System Ready</div>
-            <div class="history-item">> Holiday_Mode: ON</div>
+            <div class="history-item">System Ready</div>
+            <div class="history-item">Holiday_Mode: ON</div>
         </div>
 
-        <div style="margin-top: auto; font-size: 1rem; opacity: 0.5;">
-            System v2.3
+        <div style="margin-top: auto; font-size: 1rem; opacity: 0.4;">
+            System v2.4 (App)
         </div>
     </aside>
 
@@ -582,13 +702,14 @@
             GEMINI
             <div class="mobile-controls">
                 <button class="mobile-btn" id="mobile-donate">Ð</button>
-                <button class="mobile-btn" id="mobile-theme">☀/☾</button>
+                <button class="mobile-btn" id="mobile-theme">☀</button>
             </div>
         </div>
 
         <div class="chat-container" id="chat-container">
             <!-- Initial Greeting -->
             <div class="message ai-msg">
+                <span class="ai-icon">Gemini ♦</span>
                 <span id="typing-start">Greetings. I am Gemini. How can I assist you today?</span>
             </div>
         </div>
@@ -596,7 +717,7 @@
         <!-- Input Area -->
         <div class="input-area">
             <div class="input-box-wrapper">
-                <input type="text" id="user-input" placeholder="Enter command here..." autocomplete="off">
+                <input type="text" id="user-input" placeholder="Enter your wish or command..." autocomplete="off">
                 <button id="send-btn">➤</button>
             </div>
             
@@ -606,14 +727,17 @@
         </div>
     </main>
 
-    <!-- Donation Modal -->
+    <!-- Donation Modal (Updated Text) -->
     <div class="modal-overlay" id="donate-modal">
         <div class="modal">
-            <h2>SUPPORT DEVELOPMENT</h2>
-            <p>Send Dogecoin to keep the servers festive!</p>
+            <h2>SPREAD THE JOY</h2>
+            <p>Your contribution helps us spread joy beyond the digital world.</p>
+            <p><strong>All proceeds will be used for charitable works and helping the needy this holiday season.</strong></p>
+            
             <div class="doge-address" id="wallet-address">D775iKxVWVdYLu93yPNiMFATGLxvEvoYPh</div>
+            
             <button class="modal-btn" onclick="copyToClipboard()">COPY ADDRESS</button>
-            <button class="modal-btn" style="background:transparent; color:var(--text-color); border:1px solid var(--text-color);" onclick="closeDonateModal()">CLOSE</button>
+            <button class="modal-btn close-btn-ghost" onclick="closeDonateModal()">CLOSE</button>
         </div>
     </div>
 
@@ -761,7 +885,7 @@
 
             // Reset Chat
             newChatBtn.addEventListener('click', () => {
-                chatContainer.innerHTML = '<div class="message ai-msg">System reset complete. Ready for input.</div>';
+                chatContainer.innerHTML = '<div class="message ai-msg"><span class="ai-icon">Gemini ♦</span>System reset complete. Ready for input.</div>';
                 if(window.innerWidth <= 768) closeSidebar();
             });
 
@@ -779,7 +903,7 @@
                     setTimeout(() => {
                         const errorDiv = document.createElement('div');
                         errorDiv.classList.add('message', 'ai-msg', 'error-msg');
-                        errorDiv.textContent = "System Alert: Input too long. This is just only coded for wishing christmas.";
+                        errorDiv.innerHTML = '<span class="ai-icon">Gemini ♦</span>System Alert: Input too long. This is just only coded for wishing christmas.';
                         chatContainer.appendChild(errorDiv);
                         chatContainer.scrollTop = chatContainer.scrollHeight;
                     }, 500);
@@ -792,7 +916,7 @@
                 const loadingDiv = document.createElement('div');
                 loadingDiv.classList.add('message', 'ai-msg');
                 loadingDiv.id = 'loading-indicator';
-                loadingDiv.innerHTML = '<span class="blink">_</span> processing...';
+                loadingDiv.innerHTML = '<span class="ai-icon">Gemini ♦</span><span class="blink">_</span> processing...';
                 chatContainer.appendChild(loadingDiv);
                 chatContainer.scrollTop = chatContainer.scrollHeight;
 
@@ -815,11 +939,19 @@
                 responseDiv.classList.add('message', 'ai-msg', 'christmas-response');
                 chatContainer.appendChild(responseDiv);
                 
+                // Add Icon first
+                responseDiv.innerHTML = '<span class="ai-icon">Gemini ♦</span>';
+                
+                // Text to type
                 const phrase = "MERRY CHRISTMAS! 🎄🎅\n\nAnalyzed your request... \nResult: Wishing you joy, peace, and happiness this holiday season.";
                 
+                // Create a text node for typing
+                const textNode = document.createTextNode("");
+                responseDiv.appendChild(textNode);
+
                 let i = 0;
                 const typeInterval = setInterval(() => {
-                    responseDiv.textContent += phrase.charAt(i);
+                    textNode.nodeValue += phrase.charAt(i);
                     i++;
                     chatContainer.scrollTop = chatContainer.scrollHeight;
                     
@@ -849,7 +981,7 @@
                 snow.style.left = Math.random() * 100 + 'vw';
                 snow.style.fontSize = (Math.random() * 20 + 10) + 'px';
                 
-                const duration = Math.random() * 3 + 3;
+                const duration = Math.random() * 4 + 4; // Slower, nicer fall
                 snow.style.animationDuration = duration + 's';
                 
                 document.body.appendChild(snow);
