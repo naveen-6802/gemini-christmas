@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5D28G22L0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-V5D28G22L0');
+    </script>
+
     <!-- =========================================
          SEO & METADATA CONFIGURATION
     ========================================== -->
@@ -62,16 +72,6 @@
       "description": "A retro-themed AI chatbot simulator designed for Christmas wishes and holiday entertainment."
     }
     </script>
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V5D28G22L0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-V5D28G22L0');
-</script>
 
     <!-- Retro Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -135,7 +135,9 @@
             color: var(--text-color);
             font-family: var(--font-family);
             font-size: 1.35rem; /* Slightly larger for readability */
+            /* Use dvh (dynamic viewport height) for mobile browsers to handle address bars correctly */
             height: 100vh;
+            height: 100dvh; 
             display: flex;
             overflow: hidden;
             position: relative;
@@ -410,15 +412,15 @@
             line-height: 1.4;
         }
 
-        /* --- INPUT AREA (Clean & Floating) --- */
+        /* --- INPUT AREA (Fixed Mobile) --- */
         .input-area {
-            padding: 20px 20px 30px 20px;
-            background-color: transparent; /* Transparent to blend */
+            padding: 20px;
+            background-color: transparent;
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            /* Bottom safe area */
+            /* Ensure bottom padding handles safe areas */
             padding-bottom: max(30px, env(safe-area-inset-bottom));
         }
 
@@ -659,6 +661,14 @@
             .message { max-width: 92%; }
             .input-box-wrapper { padding: 8px 15px; }
             button#send-btn { width: 35px; height: 35px; font-size: 1rem; }
+            
+            /* Mobile Input Fix: Background to prevent see-through when scrolling */
+            .input-area {
+                background-color: var(--bg-color); 
+                transition: background-color 0.4s ease;
+                /* Add subtle top border for separation if needed */
+                /* border-top: 1px solid var(--border-color); */
+            }
         }
     </style>
 </head>
@@ -791,9 +801,9 @@
                2. Before uploading to 'gemini.christmas', UNCOMMENT the block below.
             */
 
-  /*
+            /* UNCOMMENT FOR PRODUCTION START 
             (function secureDomain() {
-                const requiredDomain = "https://www.gemini.christmas";
+                const requiredDomain = "gemini.christmas";
                 const currentDomain = window.location.hostname;
                 
                 // Allow localhost for testing if needed, otherwise strict check
@@ -808,7 +818,7 @@
                    throw new Error("Unauthorized Domain Access: Execution Halted.");
                 }
             })();
-*/
+            UNCOMMENT FOR PRODUCTION END */
             // ==========================================
 
             const chatContainer = document.getElementById('chat-container');
@@ -1010,3 +1020,5 @@
     </script>
 </body>
 </html>
+
+
