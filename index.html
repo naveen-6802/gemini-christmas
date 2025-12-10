@@ -1,1 +1,870 @@
-<p>Hello Gemini</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- =========================================
+         SEO & METADATA CONFIGURATION
+    ========================================== -->
+    <title>Gemini - Christmas Edition AI | Festive Chatbot by Naveen Soni</title>
+    <meta name="description" content="Talk to Gemini, the festive AI chatbot. A retro-styled, minimal Christmas experience. Ask Gemini anything and get holiday cheer. Created by Naveen Soni.">
+    <meta name="keywords" content="Google Gemini, Gemini AI, Gemini Christmas, AI Chatbot, Retro UI, Holiday AI, Naveen Soni, Artificial Intelligence, Christmas Wish Generator, Santa Bot, Festive Chat">
+    <meta name="author" content="Naveen Soni">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://gemini.christmas/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gemini.christmas/">
+    <meta property="og:title" content="Gemini - Christmas Edition AI">
+    <meta property="og:description" content="A minimal, retro-styled AI chatbot for the holiday season. Experience the festive side of Gemini.">
+    <meta property="og:image" content="https://gemini.christmas/assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://gemini.christmas/">
+    <meta property="twitter:title" content="Gemini - Christmas Edition AI">
+    <meta property="twitter:description" content="A minimal, retro-styled AI chatbot for the holiday season. Experience the festive side of Gemini.">
+    <meta property="twitter:image" content="https://gemini.christmas/assets/og-image.png">
+
+    <!-- JSON-LD Schema for Software Application -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Gemini Christmas Edition",
+      "operatingSystem": "Web Browser",
+      "applicationCategory": "EntertainmentApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Naveen Soni",
+        "url": "https://naveen-6802.github.io"
+      },
+      "description": "A retro-themed AI chatbot simulator designed for Christmas wishes and holiday entertainment."
+    }
+    </script>
+
+    <!-- Retro Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS RESET & VARIABLES --- */
+        :root {
+            /* Light Theme (Default) */
+            --bg-color: #fff9f9;
+            --sidebar-color: #ffebeb;
+            --text-color: #4a0505;
+            --accent-red: #cc0000;
+            --dim-red: #ffcccc;
+            --user-msg-bg: #ffcccc;
+            --user-msg-text: #4a0505;
+            --font-family: 'VT323', monospace;
+            --scanline-color: rgba(100, 0, 0, 0.05);
+            --modal-bg: #fff;
+            --modal-text: #000;
+            --overlay-color: rgba(0,0,0,0.5);
+        }
+
+        body.dark-theme {
+            /* Dark Theme */
+            --bg-color: #0f0202;
+            --sidebar-color: #1a0505;
+            --text-color: #ffe6e6;
+            --accent-red: #ff0033;
+            --dim-red: #5c0a0a;
+            --user-msg-bg: #5c0a0a;
+            --user-msg-text: #ffffff;
+            --scanline-color: rgba(255, 0, 0, 0.03);
+            --modal-bg: #1a0505;
+            --modal-text: #ffcccc;
+            --overlay-color: rgba(255, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            font-size: 1.3rem;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Scanline Effect */
+        body::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(var(--scanline-color) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 10;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px;
+            background-color: var(--sidebar-color);
+            border-right: 2px solid var(--dim-red);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            transition: transform 0.3s ease, background-color 0.3s;
+            z-index: 50;
+        }
+
+        /* Mobile Close Button (Hidden on Desktop) */
+        .sidebar-close-btn {
+            display: none; 
+            background: none;
+            border: none;
+            color: var(--accent-red);
+            font-size: 2rem;
+            align-self: flex-end;
+            cursor: pointer;
+            font-family: var(--font-family);
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: var(--accent-red);
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        /* Sidebar Buttons */
+        .sidebar-btn {
+            background: transparent;
+            border: 2px dashed var(--accent-red);
+            color: var(--accent-red);
+            padding: 10px;
+            cursor: pointer;
+            font-family: var(--font-family);
+            font-size: 1.2rem;
+            text-align: left;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-btn:hover {
+            background: var(--accent-red);
+            color: var(--bg-color);
+        }
+
+        .theme-toggle {
+            margin-top: 10px;
+            border-style: solid;
+            justify-content: center;
+        }
+
+        .history-list {
+            margin-top: 20px;
+            flex: 1;
+            opacity: 0.7;
+            font-size: 1.1rem;
+        }
+
+        .history-item {
+            padding: 8px 0;
+            cursor: default;
+        }
+        
+        /* Mobile Overlay */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--overlay-color);
+            z-index: 40;
+            backdrop-filter: blur(2px);
+        }
+
+        /* --- MAIN CHAT AREA --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 15;
+            width: 100%;
+        }
+
+        /* Mobile Header */
+        .mobile-header {
+            display: none;
+            padding: 15px;
+            border-bottom: 1px solid var(--dim-red);
+            background: var(--sidebar-color);
+            color: var(--accent-red);
+            font-size: 1.5rem;
+            text-align: center;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .menu-btn {
+            position: absolute;
+            left: 15px;
+            background: none;
+            border: none;
+            color: var(--accent-red);
+            font-size: 1.8rem;
+            cursor: pointer;
+            font-family: var(--font-family);
+            line-height: 1;
+        }
+        
+        .mobile-controls {
+            position: absolute;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .mobile-btn {
+            background: none;
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            font-family: var(--font-family);
+            padding: 2px 8px;
+            cursor: pointer;
+        }
+
+        .chat-container {
+            flex: 1;
+            padding: 20px 20px 0 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        .chat-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-container::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        .chat-container::-webkit-scrollbar-thumb {
+            background: var(--dim-red);
+        }
+
+        /* --- MESSAGES --- */
+        .message {
+            max-width: 85%;
+            padding: 10px 15px;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .user-msg {
+            align-self: flex-end;
+            background-color: var(--user-msg-bg);
+            color: var(--user-msg-text);
+            border: 1px solid var(--accent-red);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+        }
+
+        .ai-msg {
+            align-self: flex-start;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .ai-msg::before {
+            content: '♦';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            color: var(--accent-red);
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .error-msg {
+            color: var(--accent-red);
+            border: 1px dashed var(--accent-red);
+            padding: 10px;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        .christmas-response {
+            font-size: 1.8rem;
+            color: var(--accent-red);
+            text-shadow: 0 0 2px var(--accent-red);
+            white-space: pre-wrap;
+        }
+
+        /* --- INPUT AREA (TIDY & MINIMAL) --- */
+        .input-area {
+            padding: 15px;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .input-box-wrapper {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            background: var(--sidebar-color);
+            border: 2px solid var(--dim-red);
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+            border-radius: 4px;
+        }
+
+        .input-box-wrapper:focus-within {
+            border-color: var(--accent-red);
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-family: var(--font-family);
+            font-size: 1.2rem;
+            outline: none;
+            padding-top: 2px;
+        }
+
+        button#send-btn {
+            background: transparent;
+            border: none;
+            color: var(--dim-red);
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: color 0.2s;
+        }
+
+        input:not(:placeholder-shown) + button#send-btn {
+            color: var(--accent-red);
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.6;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .footer a {
+            color: var(--accent-red);
+            text-decoration: none;
+            border-bottom: 1px solid var(--dim-red);
+            padding-bottom: 1px;
+            transition: all 0.3s;
+        }
+
+        .footer a:hover {
+            background-color: var(--accent-red);
+            color: var(--bg-color);
+        }
+
+        /* --- SNOW ANIMATION --- */
+        .snowflake {
+            position: fixed;
+            top: -20px;
+            color: var(--text-color);
+            pointer-events: none;
+            z-index: 100;
+            animation: fall linear forwards;
+        }
+        
+        body.dark-theme .snowflake {
+            color: #fff;
+            text-shadow: 0 0 5px var(--accent-red);
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh); }
+        }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal {
+            background: var(--modal-bg);
+            color: var(--modal-text);
+            border: 4px double var(--accent-red);
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            font-family: var(--font-family);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .modal h2 { margin-bottom: 15px; color: var(--accent-red); }
+        .doge-address {
+            background: rgba(0,0,0,0.1);
+            padding: 10px;
+            word-break: break-all;
+            margin: 15px 0;
+            font-size: 1rem;
+            border: 1px solid var(--dim-red);
+        }
+        .modal-btn {
+            background: var(--accent-red);
+            color: #fff;
+            border: none;
+            padding: 5px 15px;
+            font-family: inherit;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* About Text Styles */
+        .about-text {
+            text-align: left;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .about-section {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--dim-red);
+        }
+        .about-section:last-child { border-bottom: none; }
+
+        /* Visually Hidden SEO Content */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 768px) {
+            .sidebar { 
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                transform: translateX(-100%);
+                width: 280px;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .sidebar-close-btn {
+                display: block;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            .mobile-header { 
+                display: flex; 
+            }
+            
+            h1 { font-size: 2rem; margin: 0; }
+            .message { max-width: 95%; }
+            
+            /* Sidebar header tweaks for mobile */
+            .sidebar h1 {
+                font-size: 2.5rem;
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body class=""> <!-- Default is Light Mode (no class) -->
+
+    <!-- SEO Content for Indexing -->
+    <div class="visually-hidden">
+        <h1>Gemini Christmas AI Chatbot</h1>
+        <p>Welcome to the festive edition of Google Gemini AI, developed by Naveen Soni. This unique interactive chatbot brings the holiday spirit to your screen.</p>
+        <h2>About Gemini Christmas</h2>
+        <p>Unlike the standard Google Gemini, this version is purely designed for holiday cheer. Enter any prompt, and receive a warm Merry Christmas wish accompanied by a beautiful digital snow animation.</p>
+        <h2>Features</h2>
+        <ul>
+            <li>Retro 8-bit aesthetic and design.</li>
+            <li>Minimal clean interface.</li>
+            <li>Dark and Light themes for comfortable viewing.</li>
+            <li>Instant holiday greetings.</li>
+        </ul>
+        <p>Built using HTML, CSS, and pure JavaScript. No backend required.</p>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <!-- Close Button (Mobile Only) -->
+        <button class="sidebar-close-btn" id="close-sidebar">×</button>
+        
+        <h1>Gemini</h1>
+        
+        <button class="sidebar-btn new-chat-btn"><span>+</span> NEW CHAT</button>
+        <button class="sidebar-btn" id="donate-btn-sidebar"><span>Ð</span> DONATE DOGE</button>
+        <button class="sidebar-btn" id="about-btn-sidebar"><span>?</span> ABOUT</button>
+        <button class="sidebar-btn theme-toggle" id="theme-btn">☀ / ☾ MODE</button>
+        
+        <div class="history-list">
+            <div class="history-item">Recent Activity...</div>
+            <div class="history-item">> System Ready</div>
+            <div class="history-item">> Holiday_Mode: ON</div>
+        </div>
+
+        <div style="margin-top: auto; font-size: 1rem; opacity: 0.5;">
+            System v2.3
+        </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="main-content">
+        <div class="mobile-header">
+            <button class="menu-btn" id="menu-btn">☰</button>
+            GEMINI
+            <div class="mobile-controls">
+                <button class="mobile-btn" id="mobile-donate">Ð</button>
+                <button class="mobile-btn" id="mobile-theme">☀/☾</button>
+            </div>
+        </div>
+
+        <div class="chat-container" id="chat-container">
+            <!-- Initial Greeting -->
+            <div class="message ai-msg">
+                <span id="typing-start">Greetings. I am Gemini. How can I assist you today?</span>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <div class="input-box-wrapper">
+                <input type="text" id="user-input" placeholder="Enter command here..." autocomplete="off">
+                <button id="send-btn">➤</button>
+            </div>
+            
+            <div class="footer">
+                Developed by <a href="https://naveen-6802.github.io" target="_blank">naveen6802</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Donation Modal -->
+    <div class="modal-overlay" id="donate-modal">
+        <div class="modal">
+            <h2>SUPPORT DEVELOPMENT</h2>
+            <p>Send Dogecoin to keep the servers festive!</p>
+            <div class="doge-address" id="wallet-address">D775iKxVWVdYLu93yPNiMFATGLxvEvoYPh</div>
+            <button class="modal-btn" onclick="copyToClipboard()">COPY ADDRESS</button>
+            <button class="modal-btn" style="background:transparent; color:var(--text-color); border:1px solid var(--text-color);" onclick="closeDonateModal()">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div class="modal-overlay" id="about-modal">
+        <div class="modal">
+            <h2>ABOUT SYSTEM</h2>
+            
+            <div class="about-text">
+                <div class="about-section">
+                    <strong>DEVELOPER:</strong> Naveen Soni<br>
+                    <strong>ORIGIN:</strong> Jaipur, Rajasthan<br>
+                    <strong>ROLE:</strong> Web Developer / Designer
+                </div>
+                
+                <div class="about-section">
+                    <strong>MISSION STATEMENT:</strong><br>
+                    To bring digital holiday cheer through a retro-futuristic interface. This project is a parody/tribute to Google Gemini, reimagined as an 8-bit Christmas terminal.
+                </div>
+
+                <div class="about-section" style="font-size: 0.95em; opacity: 0.8;">
+                    <strong>SYSTEM CREDITS:</strong><br>
+                    - Font Family: 'VT323' (Google Fonts)<br>
+                    - Inspiration: 80s Cyberpunk Terminals<br>
+                    - Stack: HTML5, CSS3, Vanilla JS
+                </div>
+            </div>
+
+            <button class="modal-btn" onclick="closeAboutModal()">CLOSE</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // ==========================================
+            //       DOMAIN LOCK (SECURITY FEATURE)
+            // ==========================================
+            /* INSTRUCTIONS: 
+               1. Test this code now. It works everywhere.
+               2. Before uploading to 'gemini.christmas', UNCOMMENT the block below.
+            */
+
+            /* UNCOMMENT FOR PRODUCTION START 
+            (function secureDomain() {
+                const requiredDomain = "gemini.christmas";
+                const currentDomain = window.location.hostname;
+                
+                // Allow localhost for testing if needed, otherwise strict check
+                if (currentDomain !== requiredDomain && currentDomain !== 'localhost') {
+                   document.body.innerHTML = `
+                        <div style="height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#0f0202; color:#ff0033; font-family:'VT323', monospace; text-align:center;">
+                            <h1 style="font-size:4rem; margin-bottom:10px;">403 ERROR</h1>
+                            <p style="font-size:1.5rem;">UNAUTHORIZED ACCESS DETECTED.</p>
+                            <p>Protocol bound to ${requiredDomain}</p>
+                        </div>
+                    `;
+                   throw new Error("Unauthorized Domain Access: Execution Halted.");
+                }
+            })();
+            UNCOMMENT FOR PRODUCTION END */
+            // ==========================================
+
+            const chatContainer = document.getElementById('chat-container');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const newChatBtn = document.querySelector('.new-chat-btn');
+            const themeBtns = [document.getElementById('theme-btn'), document.getElementById('mobile-theme')];
+            
+            // Modal Elements
+            const donateBtns = [document.getElementById('donate-btn-sidebar'), document.getElementById('mobile-donate')];
+            const aboutBtn = document.getElementById('about-btn-sidebar');
+            const donateModal = document.getElementById('donate-modal');
+            const aboutModal = document.getElementById('about-modal');
+            
+            // Sidebar Mobile Elements
+            const sidebar = document.getElementById('sidebar');
+            const menuBtn = document.getElementById('menu-btn');
+            const closeSidebarBtn = document.getElementById('close-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+
+            let isTyping = false;
+
+            // --- MOBILE SIDEBAR LOGIC ---
+            function openSidebar() {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+            }
+            function closeSidebar() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+
+            menuBtn?.addEventListener('click', openSidebar);
+            closeSidebarBtn?.addEventListener('click', closeSidebar);
+            overlay?.addEventListener('click', closeSidebar);
+
+            // --- THEME TOGGLE LOGIC ---
+            function toggleTheme() {
+                document.body.classList.toggle('dark-theme');
+            }
+            themeBtns.forEach(btn => btn?.addEventListener('click', toggleTheme));
+
+            // --- MODAL LOGIC ---
+            
+            // Donate Modal
+            donateBtns.forEach(btn => btn?.addEventListener('click', () => {
+                donateModal.style.display = 'flex';
+                if(window.innerWidth <= 768) closeSidebar();
+            }));
+
+            // About Modal
+            aboutBtn?.addEventListener('click', () => {
+                aboutModal.style.display = 'flex';
+                if(window.innerWidth <= 768) closeSidebar();
+            });
+
+            // Close Functions (exposed to window for onclick HTML attributes)
+            window.closeDonateModal = function() {
+                donateModal.style.display = 'none';
+            };
+            
+            window.closeAboutModal = function() {
+                aboutModal.style.display = 'none';
+            };
+
+            // Close when clicking outside modal
+            donateModal.addEventListener('click', (e) => {
+                if(e.target === donateModal) window.closeDonateModal();
+            });
+            aboutModal.addEventListener('click', (e) => {
+                if(e.target === aboutModal) window.closeAboutModal();
+            });
+
+            window.copyToClipboard = function() {
+                const addr = document.getElementById('wallet-address').innerText;
+                navigator.clipboard.writeText(addr).then(() => {
+                    alert("Address copied to clipboard!");
+                }).catch(() => {
+                    prompt("Copy address below:", addr);
+                });
+            };
+
+            // --- CHAT LOGIC ---
+
+            // Reset Chat
+            newChatBtn.addEventListener('click', () => {
+                chatContainer.innerHTML = '<div class="message ai-msg">System reset complete. Ready for input.</div>';
+                if(window.innerWidth <= 768) closeSidebar();
+            });
+
+            // Send Message
+            function sendMessage() {
+                const text = userInput.value.trim();
+                if (!text || isTyping) return;
+
+                // 1. Add User Message
+                addMessage(text, 'user-msg');
+                userInput.value = '';
+
+                // 2. CHECK INPUT LENGTH
+                if (text.length > 500) {
+                    setTimeout(() => {
+                        const errorDiv = document.createElement('div');
+                        errorDiv.classList.add('message', 'ai-msg', 'error-msg');
+                        errorDiv.textContent = "System Alert: Input too long. This is just only coded for wishing christmas.";
+                        chatContainer.appendChild(errorDiv);
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
+                    }, 500);
+                    return; // Stop execution here
+                }
+
+                // 3. AI Thinking Simulation
+                isTyping = true;
+                
+                const loadingDiv = document.createElement('div');
+                loadingDiv.classList.add('message', 'ai-msg');
+                loadingDiv.id = 'loading-indicator';
+                loadingDiv.innerHTML = '<span class="blink">_</span> processing...';
+                chatContainer.appendChild(loadingDiv);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                setTimeout(() => {
+                    loadingDiv.remove();
+                    triggerChristmasMode();
+                }, 800);
+            }
+
+            function addMessage(text, className) {
+                const div = document.createElement('div');
+                div.classList.add('message', className);
+                div.textContent = text;
+                chatContainer.appendChild(div);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            function triggerChristmasMode() {
+                const responseDiv = document.createElement('div');
+                responseDiv.classList.add('message', 'ai-msg', 'christmas-response');
+                chatContainer.appendChild(responseDiv);
+                
+                const phrase = "MERRY CHRISTMAS! 🎄🎅\n\nAnalyzed your request... \nResult: Wishing you joy, peace, and happiness this holiday season.";
+                
+                let i = 0;
+                const typeInterval = setInterval(() => {
+                    responseDiv.textContent += phrase.charAt(i);
+                    i++;
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                    
+                    if (i >= phrase.length) {
+                        clearInterval(typeInterval);
+                        isTyping = false;
+                        createSnowStorm();
+                    }
+                }, 40);
+            }
+
+            function createSnowStorm() {
+                let count = 0;
+                const snowInterval = setInterval(() => {
+                    createSnowflake();
+                    count++;
+                    if(count > 30) clearInterval(snowInterval);
+                }, 100);
+            }
+
+            function createSnowflake() {
+                const snow = document.createElement('div');
+                snow.classList.add('snowflake');
+                const shapes = ['❄', '❅', '❆', '.', '+', '*'];
+                snow.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                
+                snow.style.left = Math.random() * 100 + 'vw';
+                snow.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                
+                const duration = Math.random() * 3 + 3;
+                snow.style.animationDuration = duration + 's';
+                
+                document.body.appendChild(snow);
+
+                setTimeout(() => {
+                    snow.remove();
+                }, duration * 1000);
+            }
+
+            // Event Listeners
+            sendBtn.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+        });
+    </script>
+</body>
+</html>
