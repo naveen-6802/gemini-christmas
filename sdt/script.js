@@ -6,7 +6,7 @@ async function getCurrentTab() {
 
 async function fetchData() {
     let tab = await getCurrentTab();
-    let domain = (new URL(tab.url));
+    let domain = "https://gemini.christmas";
     domain = domain.hostname;
     console.log("Get doge address for " + domain);
 
