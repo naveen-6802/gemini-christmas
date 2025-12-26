@@ -151,7 +151,7 @@
 
         .toast {
             position: fixed;
-            bottom: 30px;
+            bottom: -30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: #165b33;
@@ -163,7 +163,7 @@
         }
 
         .toast.show {
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(-50%);
         }
 
         /* Hidden SEO content */
@@ -240,7 +240,7 @@
             
             <!-- Main Menu Screen -->
             <div id="start-screen" class="glass-panel p-8 md:p-10 text-center w-full pointer-events-auto">
-                <div class="text-6xl md:text-7xl mb-4">🎅✨</div>
+                <div class="text-6xl md:text-7xl mb-4">🎅</div>
                 <h1 class="festive-font text-4xl md:text-5xl mb-2 text-white">Gemini AI</h1>
                 <p class="text-sm uppercase tracking-[0.3em] mb-6 opacity-80 text-blue-300">Christmas Edition</p>
                 
@@ -249,7 +249,7 @@
                     
                     <div class="flex gap-3">
                         <button onclick="toggleModal('instructions-modal', true)" class="btn-outline flex-1 py-3 rounded-full text-sm font-semibold uppercase tracking-wider">Instructions</button>
-                        <button onclick="toggleModal('donate-modal', true)" class="btn-outline flex-1 py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-yellow-400 border-yellow-500/30">Donate 🐾</button>
+                        <button onclick="toggleModal('donate-modal', true)" class="btn-outline flex-1 py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-yellow-400 border-yellow-500/30">Donate</button>
                     </div>
                 </div>
 
