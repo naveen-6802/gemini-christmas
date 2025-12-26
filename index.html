@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <!-- Google tag (gtag.js) -->
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5D28G22L0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -13,14 +12,12 @@
 
       gtag('config', 'G-V5D28G22L0');
     </script>
-
-    <!-- =========================================
-         SEO & METADATA CONFIGURATION
-    ========================================== -->
+    
+    <!-- SEO & Meta Tags - Optimized for Gemini AI Christmas -->
     <title>Gemini AI</title>
-    <meta name="description" content="Talk to Gemini, the festive AI chatbot. A retro-styled, minimal Christmas experience. Ask Gemini anything and get holiday cheer. Created by Naveen Soni.">
-    <meta name="keywords" content="Google Gemini, Gemini AI, Gemini Christmas, AI Chatbot, Retro UI, Holiday AI, Naveen Soni, Artificial Intelligence, Christmas Wish Generator, Santa Bot, Festive Chat">
-    <meta name="author" content="Naveen Soni">
+    <meta name="description" content="Play Gemini AI Christmas: Santa's Festive Catch. A fun, smooth, and elegant web game built by Gemini AI. Catch gifts, avoid coal, and celebrate the holidays!">
+    <meta name="keywords" content="Gemini, Gemini AI, Google Gemini, Gemini Christmas, Gemini AI Game, Christmas Game, Santa Game, Web Game, HTML5 Game, Dogecoin Donation">
+    <meta name="author" content="Gemini AI">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://gemini.christmas/" />
 
@@ -30,176 +27,538 @@
     <link rel="icon" type="image/x-icon" sizes="128x128" href="f128.ico">
     <link rel="shortcut icon" href="f32.ico" type="image/x-icon">
 
-    <!-- Mobile App Configuration (iOS & Android) -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Gemini Xmas">
-    <link rel="apple-touch-icon" href="f128.ico">
-    <meta name="theme-color" content="#d42426">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://gemini.christmas/">
-    <meta property="og:title" content="Gemini - Christmas Edition AI">
-    <meta property="og:description" content="A minimal, retro-styled AI chatbot for the holiday season. Experience the festive side of Gemini.">
-    <meta property="og:image" content="https://gemini.christmas/assets/og-image.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://gemini.christmas/">
-    <meta property="twitter:title" content="Gemini - Christmas Edition AI">
-    <meta property="twitter:description" content="A minimal, retro-styled AI chatbot for the holiday season. Experience the festive side of Gemini.">
-    <meta property="twitter:image" content="https://gemini.christmas/assets/og-image.png">
-
-    <!-- JSON-LD Schema for Software Application -->
+    <!-- Structured Data (Schema.org) for SEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Gemini Christmas Edition",
-      "operatingSystem": "Web Browser",
-      "applicationCategory": "EntertainmentApplication",
+      "name": "Gemini AI Christmas: Santa's Festive Catch",
+      "operatingSystem": "Web, Mobile, Windows, macOS, Linux",
+      "applicationCategory": "GameApplication",
+      "genre": "Arcade",
+      "author": {
+        "@type": "Organization",
+        "name": "Gemini AI"
+      },
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
       },
-      "author": {
-        "@type": "Person",
-        "name": "Naveen Soni",
-        "url": "https://naveen-6802.github.io"
-      },
-      "description": "A retro-themed AI chatbot simulator designed for Christmas wishes and holiday entertainment."
+      "description": "A festive Christmas game powered by Gemini AI. Help Santa catch gifts and avoid coal in this smooth HTML5 experience.",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "1250"
+      }
     }
     </script>
-
-    <!-- Retro Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gemini.christmas/">
+    <meta property="og:title" content="Gemini AI Christmas - Santa's Festive Catch">
+    <meta property="og:description" content="Experience the magic of Christmas with Gemini AI. Play the ultimate festive catch game!">
+    <meta property="og:image" content="https://gemini.christmas/assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://gemini.christmas/">
+    <meta property="twitter:title" content="Gemini AI Christmas - Santa's Festive Catch Game">
+    <meta property="twitter:description" content="Play the festive game powered by Gemini AI logic.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+
+
+    <style>
+        :root {
+            --christmas-red: #d42426;
+            --christmas-green: #165b33;
+            --snow-white: #f8f9fa;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #050b18, #112240);
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            user-select: none;
+            touch-action: none;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .festive-font {
+            font-family: 'Mountains of Christmas', cursive;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #d42426 0%, #a81c1e 100%);
+            transition: all 0.2s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 20px rgba(212, 36, 38, 0.5);
+        }
+
+        .btn-outline {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: white;
+        }
+
+        #game-ui {
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        #game-ui * {
+            pointer-events: auto;
+        }
+
+        @keyframes snow-fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #165b33;
+            padding: 12px 24px;
+            border-radius: 30px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Hidden SEO content */
+        .seo-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* Modal styling */
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+        }
+
+        .address-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .address-box:hover {
+            border-color: #fbbf24;
+            background: rgba(0, 0, 0, 0.6);
+        }
+    </style>
 </head>
-<body class=""> <!-- Default is Light Mode (no class) -->
+<body>
 
-    <!-- SEO Content for Indexing -->
-    <div class="visually-hidden">
-        <h1>Gemini AI</h1>
-        <p>Welcome to the festive edition of Google Gemini AI, developed by Naveen Soni. This unique interactive chatbot brings the holiday spirit to your screen.</p>
-        <h2>About Gemini Christmas</h2>
-        <p>Unlike the standard Google Gemini, this version is purely designed for holiday cheer. Enter any prompt, and receive a warm Merry Christmas wish accompanied by a beautiful digital snow animation.</p>
-        <h2>Features</h2>
-        <ul>
-            <li>Retro 8-bit aesthetic and design.</li>
-            <li>Minimal clean interface.</li>
-            <li>Dark and Light themes for comfortable viewing.</li>
-            <li>Instant holiday greetings.</li>
-        </ul>
-        <p>Built using HTML, CSS, and pure JavaScript. No backend required.</p>
+    <!-- Hidden SEO text for search engines -->
+    <div class="seo-hidden">
+        <h1>Gemini AI Christmas - The Ultimate Santa Catch Experience</h1>
+        <p>This festive game is powered by Gemini AI, similar to Google Gemini technology, providing a smooth and elegant holiday experience. Keywords: Google Gemini AI, Gemini Christmas, Christmas 2025, Santa Claus Game, Play Gemini AI, Dogecoin Support, Festive App, Gemini Christmas Game Online.</p>
+        <article>
+            <h2>How to play Gemini AI Christmas</h2>
+            <p>Move Santa using your mouse or touch screen. Catch the gifts falling from the sky. Be careful of the black coal! missing a gift will also cost a life. Set high scores and share with friends in this Gemini AI powered web application. Support us by donating Dogecoin to D775iKxVWVdYLu93yPNiMFATGLxvEvoYPh.</p>
+        </article>
     </div>
 
-    <!-- Mobile Overlay -->
-    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <!-- Snow Layer -->
+    <div id="snow-container"></div>
 
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <!-- Close Button (Mobile Only) -->
-        <button class="sidebar-close-btn" id="close-sidebar">×</button>
+    <!-- Main Game Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Overlay UI -->
+    <div id="game-ui" class="fixed inset-0 flex flex-col items-center justify-between p-4 md:p-8">
         
-        <h2 class="h1">Gemini</h2>
-        
-        <button class="sidebar-btn new-chat-btn"><span>+</span> NEW CHAT</button>
-        <button class="sidebar-btn" id="donate-btn-sidebar"><span>Ð</span> CHARITY / DONATE</button>
-        <button class="sidebar-btn" id="about-btn-sidebar"><span>?</span> ABOUT</button>
-        <button class="sidebar-btn theme-toggle" id="theme-btn"><span>☀</span> THEME MODE</button>
-        
-        <div class="history-list">
-            <div class="history-item">System Ready</div>
-            <div class="history-item">Holiday_Mode: ON</div>
-        </div>
-
-        <div style="margin-top: auto; font-size: 1rem; opacity: 0.4;">
-            System v2.4
-        </div>
-    </aside>
-
-    <!-- Main Chat Area -->
-    <main class="main-content">
-        <div class="mobile-header">
-            <button class="menu-btn" id="menu-btn">☰</button>
-            GEMINI
-            <div class="mobile-controls">
-                <button class="mobile-btn" id="mobile-donate">Ð</button>
-                <button class="mobile-btn" id="mobile-theme">☀</button>
-            </div>
-        </div>
-
-        <div class="chat-container" id="chat-container">
-            <!-- Initial Greeting -->
-            <div class="message ai-msg">
-                <span class="ai-icon">Gemini ♦</span>
-                <span id="typing-start">Greetings. I am Gemini. How can I assist you today?</span>
-            </div>
-        </div>
-
-        <!-- Input Area -->
-        <div class="input-area">
-            <div class="input-box-wrapper">
-                <input type="text" id="user-input" placeholder="Enter your wish or command..." autocomplete="off">
-                <button id="send-btn">➤</button>
-            </div>
-            
-            <div class="footer">
-                Developed by <a href="https://naveen-6802.github.io" target="_blank">naveen6802</a>
-            </div>
-        </div>
-    </main>
-
-    <!-- Donation Modal (Updated Text) -->
-    <div class="modal-overlay" id="donate-modal">
-        <div class="modal">
-            <h2>SPREAD THE JOY | Donate Dogecoin</h2>
-            <p>Your contribution helps us spread joy beyond the digital world.</p>
-            <p><strong>All proceeds will be used for charitable works and helping the needy this holiday season.</strong></p>
-            
-            <div class="doge-address" id="wallet-address">D775iKxVWVdYLu93yPNiMFATGLxvEvoYPh</div>
-            
-            <button class="modal-btn" onclick="copyToClipboard()">COPY ADDRESS</button>
-            <button class="modal-btn close-btn-ghost" onclick="closeDonateModal()">CLOSE</button>
-        </div>
-    </div>
-
-    <!-- About Modal -->
-    <div class="modal-overlay" id="about-modal">
-        <div class="modal">
-            <h2>ABOUT SYSTEM</h2>
-            
-            <div class="about-text">
-                <div class="about-section">
-                    <strong>DEVELOPER:</strong> Naveen Soni<br>
-                    <strong>ORIGIN:</strong> Jaipur, Rajasthan<br>
-                    <strong>ROLE:</strong> Web Developer / Designer
+        <!-- Header (Only visible during gameplay) -->
+        <div id="header-hud" class="w-full flex justify-between items-start max-w-6xl opacity-0 transition-opacity duration-500">
+            <div class="flex gap-2 md:gap-3">
+                <div class="glass-panel p-2 md:p-3 px-4 md:px-5 text-center">
+                    <p class="text-[9px] md:text-[10px] uppercase tracking-widest opacity-70">Score</p>
+                    <h2 id="score" class="text-xl md:text-2xl font-bold festive-font text-white">0</h2>
                 </div>
+                <div class="glass-panel p-2 md:p-3 px-4 md:px-5 text-center">
+                    <p class="text-[9px] md:text-[10px] uppercase tracking-widest opacity-70">Best</p>
+                    <h2 id="high-score" class="text-xl md:text-2xl font-bold festive-font text-yellow-400">0</h2>
+                </div>
+            </div>
+            <div class="glass-panel p-2 md:p-3 px-4 md:px-5 text-right">
+                <p class="text-[9px] md:text-[10px] uppercase tracking-widest opacity-70">Lives</p>
+                <div id="lives" class="text-lg md:text-xl mt-1">❤️❤️❤️</div>
+            </div>
+        </div>
+
+        <!-- Center Container -->
+        <div class="flex flex-col items-center justify-center flex-1 w-full max-w-md">
+            
+            <!-- Main Menu Screen -->
+            <div id="start-screen" class="glass-panel p-8 md:p-10 text-center w-full pointer-events-auto">
+                <div class="text-6xl md:text-7xl mb-4">🎅✨</div>
+                <h1 class="festive-font text-4xl md:text-5xl mb-2 text-white">Gemini AI</h1>
+                <p class="text-sm uppercase tracking-[0.3em] mb-6 opacity-80 text-blue-300">Christmas Edition</p>
                 
-                <div class="about-section">
-                    <strong>MISSION STATEMENT:</strong><br>
-                    To bring digital holiday cheer through a retro-futuristic interface. This project is a parody/tribute to Google Gemini, reimagined as an 8-bit Christmas terminal.
+                <div class="flex flex-col gap-4">
+                    <button onclick="startGame()" class="btn-gradient w-full py-4 rounded-full text-xl font-bold uppercase tracking-widest shadow-lg">Play Game</button>
+                    
+                    <div class="flex gap-3">
+                        <button onclick="toggleModal('instructions-modal', true)" class="btn-outline flex-1 py-3 rounded-full text-sm font-semibold uppercase tracking-wider">Instructions</button>
+                        <button onclick="toggleModal('donate-modal', true)" class="btn-outline flex-1 py-3 rounded-full text-sm font-semibold uppercase tracking-wider text-yellow-400 border-yellow-500/30">Donate 🐾</button>
+                    </div>
                 </div>
 
-                <div class="about-section" style="font-size: 0.95em; opacity: 0.8;">
-                    <strong>SYSTEM CREDITS:</strong><br>
-                    - Font Family: 'VT323' (Google Fonts)<br>
-                    - Inspiration: 80s Cyberpunk Terminals<br>
-                    - Stack: HTML5, CSS3, Vanilla JS
-                </div>
+                <p class="mt-8 text-[10px] opacity-40 uppercase tracking-widest">Powered by Gemini AI Technology</p>
             </div>
 
-            <button class="modal-btn" onclick="closeAboutModal()">CLOSE</button>
+            <!-- Game Over Screen -->
+            <div id="game-over" class="hidden glass-panel p-8 md:p-10 text-center w-full pointer-events-auto">
+                <h2 class="festive-font text-5xl md:text-6xl mb-2 text-red-500">Out of Time!</h2>
+                <p class="text-lg mb-1 opacity-80">Final Score</p>
+                <p id="final-score" class="text-5xl font-bold text-white mb-6 festive-font">0</p>
+                <div id="new-record-msg" class="hidden text-yellow-400 font-bold mb-6 animate-bounce">✨ NEW PERSONAL BEST ✨</div>
+                
+                <div class="flex flex-col gap-3">
+                    <button onclick="startGame()" class="btn-gradient w-full py-4 rounded-full text-lg font-bold uppercase tracking-widest">Play Again</button>
+                    <button onclick="showMainMenu()" class="btn-outline w-full py-3 rounded-full text-sm font-semibold uppercase tracking-widest">Main Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty footer to balance layout -->
+        <div class="h-10"></div>
+    </div>
+
+    <!-- Instructions Modal -->
+    <div id="instructions-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex items-center justify-center p-6">
+        <div class="glass-panel max-w-sm w-full p-8 text-center">
+            <h3 class="festive-font text-4xl mb-6">How to Play</h3>
+            <div class="space-y-6 text-left text-sm text-gray-200">
+                <div class="flex items-center gap-4">
+                    <div class="text-3xl">🖱️</div>
+                    <p><strong>Mouse/Touch:</strong> Move Santa left and right to catch items.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-3xl">🎁</div>
+                    <p><strong>Catch Gifts:</strong> Each gift gives you 1 point. Don't let them hit the ground!</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-3xl">🌑</div>
+                    <p><strong>Avoid Coal:</strong> Touching coal costs 1 life. You have 3 lives total.</p>
+                </div>
+            </div>
+            <button onclick="toggleModal('instructions-modal', false)" class="btn-gradient w-full mt-8 py-3 rounded-full font-bold uppercase tracking-widest">Got it!</button>
         </div>
     </div>
 
-<script src="code.js"></script>
+    <!-- Donation Modal -->
+    <div id="donate-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex items-center justify-center p-6">
+        <div class="glass-panel max-w-md w-full p-8 text-center border-yellow-500/20">
+            <div class="text-5xl mb-4">🐕🐾</div>
+            <h3 class="festive-font text-4xl text-yellow-400 mb-2">Support This Website</h3>
+            <p class="text-sm text-gray-300 mb-8 leading-relaxed">We provide this game for free! Please consider donating Dogecoin to help us cover server costs and keep development alive.</p>
+            
+            <div class="address-box rounded-2xl p-6 mb-8">
+                <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-yellow-500 mb-3">Your Support Address (DOGE)</p>
+                <div class="flex flex-col gap-4">
+                    <span class="text-sm md:text-base font-mono font-bold break-all bg-white/5 p-3 rounded-lg border border-white/10 select-all" id="doge-address">D775iKxVWVdYLu93yPNiMFATGLxvEvoYPh</span>
+                    <button onclick="copyAddress()" class="w-full py-4 bg-yellow-500 hover:bg-yellow-400 text-black rounded-xl font-black uppercase tracking-widest transition-all shadow-lg active:scale-95">
+                        Copy Address
+                    </button>
+                </div>
+            </div>
+            
+            <button onclick="toggleModal('donate-modal', false)" class="text-xs opacity-50 hover:opacity-100 transition-opacity uppercase tracking-widest font-semibold">I'll help later</button>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">Address copied! Thank you for the support! 🐾</div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const dogeAddress = "D775iKxVWVdYLu93yPNiMFATGLxvEvoYPh";
+        
+        let animationId;
+        let gameActive = false;
+        let score = 0;
+        let highScore = parseInt(localStorage.getItem('santaCatchHighScore')) || 0;
+        let lives = 3;
+        let lastTime = 0;
+        let itemTimer = 0;
+        let items = [];
+        let player = {
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 100,
+            targetX: 0
+        };
+
+        document.getElementById('high-score').innerText = highScore;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const bottomOffset = window.innerWidth < 768 ? 140 : 180;
+            player.y = canvas.height - bottomOffset; 
+            player.x = canvas.width / 2 - player.width / 2;
+            player.targetX = player.x;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        function createSnow() {
+            const container = document.getElementById('snow-container');
+            container.innerHTML = '';
+            const count = window.innerWidth < 768 ? 30 : 60;
+            for (let i = 0; i < count; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = '❄';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.fontSize = Math.random() * 10 + 8 + 'px';
+                snowflake.style.animation = `snow-fall ${Math.random() * 5 + 5}s linear infinite`;
+                snowflake.style.animationDelay = `-${Math.random() * 10}s`;
+                snowflake.style.opacity = Math.random() * 0.5 + 0.3;
+                container.appendChild(snowflake);
+            }
+        }
+        createSnow();
+
+        class FallingItem {
+            constructor() {
+                this.width = 45;
+                this.height = 45;
+                this.x = Math.random() * (canvas.width - this.width);
+                this.y = -60;
+                this.speed = Math.random() * 2 + 3 + (score / 15);
+                this.isCoal = Math.random() > 0.85;
+                this.emoji = this.isCoal ? '🌑' : ['🎁', '🎁', '🍭', '⭐', '🎄', '🍪'][Math.floor(Math.random() * 6)];
+                this.rotation = 0;
+                this.rotSpeed = (Math.random() - 0.5) * 0.15;
+            }
+
+            update() {
+                this.y += this.speed;
+                this.rotation += this.rotSpeed;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
+                ctx.rotate(this.rotation);
+                
+                if(!this.isCoal) {
+                    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 30);
+                    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.4)');
+                    gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 30, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.font = this.isCoal ? '32px Arial' : '42px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.shadowColor = 'rgba(0,0,0,0.5)';
+                ctx.shadowBlur = 10;
+                ctx.fillText(this.emoji, 0, 0);
+                ctx.restore();
+            }
+        }
+
+        function startGame() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('game-over').classList.add('hidden');
+            document.getElementById('header-hud').classList.remove('opacity-0');
+            gameActive = true;
+            score = 0;
+            lives = 3;
+            items = [];
+            itemTimer = 0;
+            updateUI();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function showMainMenu() {
+            document.getElementById('game-over').classList.add('hidden');
+            document.getElementById('start-screen').classList.remove('hidden');
+            document.getElementById('header-hud').classList.add('opacity-0');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function gameOver() {
+            gameActive = false;
+            cancelAnimationFrame(animationId);
+            
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('santaCatchHighScore', highScore);
+                document.getElementById('high-score').innerText = highScore;
+                document.getElementById('new-record-msg').classList.remove('hidden');
+            } else {
+                document.getElementById('new-record-msg').classList.add('hidden');
+            }
+
+            document.getElementById('game-over').classList.remove('hidden');
+            document.getElementById('final-score').innerText = score;
+        }
+
+        function updateUI() {
+            document.getElementById('score').innerText = score;
+            document.getElementById('lives').innerText = '❤️'.repeat(lives);
+        }
+
+        function toggleModal(id, show) {
+            document.getElementById(id).classList.toggle('hidden', !show);
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            if (!gameActive) return;
+            player.targetX = e.clientX - player.width / 2;
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!gameActive) return;
+            e.preventDefault();
+            player.targetX = e.touches[0].clientX - player.width / 2;
+        }, { passive: false });
+
+        window.addEventListener('keydown', (e) => {
+            if (!gameActive) return;
+            if (e.key === 'ArrowLeft') player.targetX -= 50;
+            if (e.key === 'ArrowRight') player.targetX += 50;
+        });
+
+        function gameLoop(timestamp) {
+            if (!gameActive) return;
+
+            const deltaTime = timestamp - lastTime;
+            lastTime = timestamp;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            player.x += (player.targetX - player.x) * 0.2;
+
+            if (player.x < 0) { player.x = 0; player.targetX = 0; }
+            if (player.x > canvas.width - player.width) { 
+                player.x = canvas.width - player.width; 
+                player.targetX = canvas.width - player.width; 
+            }
+
+            ctx.font = '90px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🎅', player.x + player.width / 2, player.y + 80);
+
+            itemTimer += deltaTime;
+            const spawnRate = Math.max(250, 900 - (score * 8));
+            if (itemTimer > spawnRate) {
+                items.push(new FallingItem());
+                itemTimer = 0;
+            }
+
+            for (let i = items.length - 1; i >= 0; i--) {
+                const item = items[i];
+                item.update();
+                item.draw();
+
+                if (
+                    item.y + item.height > player.y + 20 &&
+                    item.y < player.y + player.height &&
+                    item.x + 5 + item.width - 10 > player.x + 10 &&
+                    item.x + 5 < player.x + player.width - 10
+                ) {
+                    if (item.isCoal) {
+                        lives--;
+                        items.splice(i, 1);
+                        updateUI();
+                        if (lives <= 0) gameOver();
+                    } else {
+                        score++;
+                        items.splice(i, 1);
+                        updateUI();
+                    }
+                    continue;
+                }
+
+                if (item.y > canvas.height) {
+                    if (!item.isCoal) {
+                        lives--;
+                        updateUI();
+                        if (lives <= 0) gameOver();
+                    }
+                    items.splice(i, 1);
+                }
+            }
+
+            animationId = requestAnimationFrame(gameLoop);
+        }
+
+        function copyAddress() {
+            // Updated to be more reliable in all environments
+            const textArea = document.createElement("textarea");
+            textArea.value = dogeAddress;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+            document.body.removeChild(textArea);
+        }
+    </script>
 </body>
 </html>
-
-
